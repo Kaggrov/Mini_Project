@@ -19,7 +19,7 @@ class AppTextField extends StatelessWidget {
     return TextField(
       controller: this.controller,
       autofocus: this.autofocus,
-      cursorColor: Color(0xFF5BC8AA),
+      cursorColor: Color(0xFF2E5CE8),
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelText: labelText,

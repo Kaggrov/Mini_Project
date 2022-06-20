@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:facedetectionattandanceapp/models/user_model.dart';
+import 'package:mini_project/models/user_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,6 +12,9 @@ class DatabaseHelper {
   static final columnId = 'id';
   static final columnUser = 'user';
   static final columnPassword = 'password';
+  static final columnBirth = 'birth';
+  static final columnContact = 'contact';
+  static final columnAddress = 'address';
   static final columnModelData = 'model_data';
 
   DatabaseHelper._privateConstructor();
@@ -37,6 +40,9 @@ class DatabaseHelper {
             $columnId INTEGER PRIMARY KEY,
             $columnUser TEXT NOT NULL,
             $columnPassword TEXT NOT NULL,
+            $columnBirth TEXT NOT NULL,
+            $columnContact TEXT NOT NULL,
+            $columnAddress TEXT NOT NULL,
             $columnModelData TEXT NOT NULL UNIQUE
           )
           ''');

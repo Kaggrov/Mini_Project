@@ -1,7 +1,7 @@
-import 'package:facedetectionattandanceapp/services/facenet_service.dart';
-import 'package:facedetectionattandanceapp/services/ml_kit_service.dart';
-import 'package:facedetectionattandanceapp/signin.dart';
-import 'package:facedetectionattandanceapp/signup.dart';
+import 'package:mini_project/services/facenet_service.dart';
+import 'package:mini_project/services/ml_kit_service.dart';
+import 'package:mini_project/signin.dart';
+import 'package:mini_project/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
@@ -21,7 +21,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late CameraDescription cameraDescription;
   bool loading = false;
-  String githubUrl = "https://github.com/The-Assembly";
 
   @override
   void initState() {
@@ -32,12 +31,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.red,
+
+    return Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.purple, Colors.orange])),
+     child: Scaffold(
+       backgroundColor: Colors.transparent,
       appBar: AppBar(
         leading: Container(),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.deepOrangeAccent,
+        title: const Text('Child Recognition'),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20, top: 20),
@@ -78,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: const [
                     Text(
-                      "FACE RECOGNITION AUTHENTICATION",
+                      "Missing Child Detection !!",
                       style: TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -87,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 20,
                     ),
                     Text(
-                      "Demo application that uses Flutter and tensorflow to implement authentication with facial recognition",
+                      "Follow instructions to help a missing child, reach their home. Call 100 to get Verification Code",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -129,13 +136,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'LOGIN',
+                            'Scan Child',
                             style: TextStyle(color: Color(0xFF0F0BDB)),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Icon(Icons.login, color: Color(0xFF0F0BDB))
+                          Icon(Icons.document_scanner_sharp, color: Color(0xFF0F0BDB))
                         ],
                       ),
                     ),
@@ -174,13 +181,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'SIGN UP',
+                            'Register Child',
                             style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Icon(Icons.person_add, color: Colors.white)
+                          Icon(Icons.app_registration_sharp, color: Colors.white)
                         ],
                       ),
                     ),
@@ -195,17 +202,17 @@ class _MyHomePageState extends State<MyHomePage> {
           : Center(
         child: CircularProgressIndicator(),
       ),
-    );
+    ));
   }
   void _startup() async{
     _setLoading(true);
 
     List<CameraDescription> cameras = await availableCameras();
 
-    /// takes the front camera
+    /// takes the back camera
     cameraDescription = cameras.firstWhere(
           (CameraDescription camera) =>
-      camera.lensDirection == CameraLensDirection.front,
+      camera.lensDirection == CameraLensDirection.back,
     );
 
     // start the services

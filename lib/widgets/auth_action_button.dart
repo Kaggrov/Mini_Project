@@ -1,10 +1,10 @@
-import 'package:facedetectionattandanceapp/database/database.dart';
-import 'package:facedetectionattandanceapp/home_page.dart';
-import 'package:facedetectionattandanceapp/models/user_model.dart';
-import 'package:facedetectionattandanceapp/profile.dart';
-import 'package:facedetectionattandanceapp/services/camera_service.dart';
-import 'package:facedetectionattandanceapp/services/facenet_service.dart';
-import 'package:facedetectionattandanceapp/widgets/app_button.dart';
+import 'package:mini_project/database/database.dart';
+import 'package:mini_project/home_page.dart';
+import 'package:mini_project/models/user_model.dart';
+import 'package:mini_project/profile.dart';
+import 'package:mini_project/services/camera_service.dart';
+import 'package:mini_project/services/facenet_service.dart';
+import 'package:mini_project/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'app_text_field.dart';
 
@@ -24,6 +24,12 @@ final CameraService _cameraService = CameraService();
 
 final TextEditingController _userTextEditingController =
 TextEditingController(text: '');
+final TextEditingController _birthTextEditingController =
+TextEditingController(text: '');
+final TextEditingController _parentContactTextEditingController =
+TextEditingController(text: '');
+final TextEditingController _addressTextEditingController =
+TextEditingController(text: '');
 final TextEditingController _passwordTextEditingController =
 TextEditingController(text: '');
 
@@ -36,9 +42,15 @@ Future _signUp(context) async {
   print('AuthactionPredicatedData: $predictedData');
   String? user = _userTextEditingController.text;
   String? password = _passwordTextEditingController.text;
+  String? birth = _birthTextEditingController.text;
+  String? contact = _parentContactTextEditingController.text;
+  String? address = _addressTextEditingController.text;
   User userToSave = User(
     user: user,
     password: password,
+    birth: birth,
+    contact: contact,
+    address: address,
     modelData: predictedData,
   );
   /// creates a new user in the 'database'
@@ -47,6 +59,9 @@ Future _signUp(context) async {
   _faceNetService.setPredictedData(null);
   _userTextEditingController.text="";
   _passwordTextEditingController.text="";
+  _birthTextEditingController.text =  "";
+  _parentContactTextEditingController.text = "";
+  _addressTextEditingController.text = "";
   Navigator.push(context,
       MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
 }
@@ -62,6 +77,9 @@ Future _signIn(context) async {
         MaterialPageRoute(
             builder: (BuildContext context) => Profile(
               predictedUser!.user,
+              predictedUser!.birth,
+              predictedUser!.address,
+              predictedUser!.contact,
               imagePath: _cameraService.imagePath!,
             )));
   } else {
@@ -69,7 +87,7 @@ Future _signIn(context) async {
       context: context,
       builder: (context) {
         return const AlertDialog(
-          content: Text('Wrong password!'),
+          content: Text('Wrong Verification Code!'),
         );
       },
     );
@@ -120,7 +138,7 @@ class _AuthActionButtonState extends State<AuthActionButton> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color:Colors.blue[200],
+          color:Colors.deepOrange[300],
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: Colors.blue.withOpacity(0.1),
@@ -137,7 +155,7 @@ class _AuthActionButtonState extends State<AuthActionButton> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
-              'CAPTURE',
+              'SCAN IMAGE',
               style: TextStyle(color: Colors.white),
             ),
             SizedBox(
@@ -159,16 +177,25 @@ class _AuthActionButtonState extends State<AuthActionButton> {
         children: [
           widget.isLogin && predictedUser != null
               ? Container(
-            child: Text(
-              'Welcome back, ' + predictedUser.user + '.',
-              style: TextStyle(fontSize: 20),
-            ),
-
+            child: Column(
+              children: [
+                Text(
+                  'Missing Child Detected, Name : ' + predictedUser.user,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Divider(),
+                Text(
+                  'Date of Birth : ' + predictedUser.birth,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            )
           )
+
               : widget.isLogin
               ? Container(
-              child: Text(
-                'User not found 😞',
+              child: const Text(
+                'Not a Missing Child ✖',
                 style: TextStyle(fontSize: 20),
               ))
               : Container(),
@@ -178,7 +205,30 @@ class _AuthActionButtonState extends State<AuthActionButton> {
                 !widget.isLogin
                     ? AppTextField(
                   controller: _userTextEditingController,
-                  labelText: "Your Name",
+                  labelText: "Child Name",
+                )
+                    : Container(),
+                SizedBox(height: 10),
+
+                !widget.isLogin
+                    ? AppTextField(
+                  controller: _birthTextEditingController,
+                  labelText: "Date of Birth",
+                )
+                    : Container(),
+                SizedBox(height: 10),
+
+                !widget.isLogin
+                    ? AppTextField(
+                  controller: _parentContactTextEditingController,
+                  labelText: "Parent's Contact Details",
+                )
+                    : Container(),
+                SizedBox(height: 10),
+                !widget.isLogin
+                    ? AppTextField(
+                  controller: _addressTextEditingController,
+                  labelText: "Contact Address",
                 )
                     : Container(),
                 SizedBox(height: 10),
@@ -186,15 +236,15 @@ class _AuthActionButtonState extends State<AuthActionButton> {
                     ? Container()
                     : AppTextField(
                   controller: _passwordTextEditingController,
-                  labelText: "Password",
-                  isPassword: true,
+                  labelText: "Verification Code",
+                  isPassword: false,
                 ),
                 SizedBox(height: 10),
                 Divider(),
                 SizedBox(height: 10),
                 widget.isLogin && predictedUser != null
                     ? AppButton(
-                  text: 'LOGIN',
+                  text: 'Get Details',
                   onPressed: () async {
                     _signIn(context);
                   },
@@ -205,7 +255,7 @@ class _AuthActionButtonState extends State<AuthActionButton> {
                 )
                     : !widget.isLogin?
                      AppButton(
-                  text: 'SIGN UP',
+                  text: 'REGISTER',
                   onPressed: () async {
                     await _signUp(context);
                   },

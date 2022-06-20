@@ -1,15 +1,16 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:facedetectionattandanceapp/services/camera_service.dart';
-import 'package:facedetectionattandanceapp/services/facenet_service.dart';
-import 'package:facedetectionattandanceapp/services/ml_kit_service.dart';
-import 'package:facedetectionattandanceapp/widgets/FacePainter.dart';
-import 'package:facedetectionattandanceapp/widgets/auth_action_button.dart';
-import 'package:facedetectionattandanceapp/widgets/camera_header.dart';
+import 'package:mini_project/services/camera_service.dart';
+import 'package:mini_project/services/facenet_service.dart';
+import 'package:mini_project/services/ml_kit_service.dart';
+import 'package:mini_project/widgets/FacePainter.dart';
+import 'package:mini_project/widgets/auth_action_button.dart';
+import 'package:mini_project/widgets/camera_header.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'dart:math'as math;
+
 class SignUp extends StatefulWidget {
   final CameraDescription cameraDescription;
   const SignUp({Key? key, required this.cameraDescription}) : super(key: key);
@@ -50,7 +51,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    const double mirror = math.pi;
+    const double mirror = 0;
     final width = MediaQuery
         .of(context)
         .size
@@ -124,7 +125,7 @@ class _SignUpState extends State<SignUp> {
               },
             ),
             CameraHeader(
-              "SIGN UP",
+              "CHILD REGISTRATION",
               onBackPressed: _onBackPressed,
             )
           ],

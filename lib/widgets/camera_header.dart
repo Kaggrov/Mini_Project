@@ -27,7 +27,7 @@ class CameraHeader extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20),
+                color: Colors.deepOrangeAccent, fontWeight: FontWeight.w600, fontSize: 20),
             textAlign: TextAlign.center,
           ),
           SizedBox(

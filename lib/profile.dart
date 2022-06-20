@@ -1,24 +1,30 @@
 import 'dart:io';
 
-import 'package:facedetectionattandanceapp/home_page.dart';
-import 'package:facedetectionattandanceapp/widgets/app_button.dart';
+import 'package:mini_project/home_page.dart';
+import 'package:mini_project/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'dart:math'as math;
+
 class Profile extends StatelessWidget {
-   Profile(this.username, { Key? key, required this.imagePath}) : super(key: key);
+
+  const Profile(this.username, this.birth,this.address,this.contact,{ Key? key, required this.imagePath}) : super(key: key);
+
   final String username;
   final String imagePath;
-  String githubUrl = "https://github.com/The-Assembly";
-
-  void _launchURL()async=>
-      await canLaunch(githubUrl)?await
-          launch(githubUrl)
-          :throw 'could not launch $githubUrl';
+  final String birth;
+  final String address;
+  final String contact;
+  // String githubUrl = "https://github.com/The-Assembly";
+  //
+  // void _launchURL()async=>
+  //     await canLaunch(githubUrl)?await
+  //         launch(githubUrl)
+  //         :throw 'could not launch $githubUrl';
   @override
   Widget build(BuildContext context) {
-    final double mirror = math.pi;
+    final double mirror = 0;
     return Scaffold(
       backgroundColor: Color(0XFFC7FFBE),
       body: SafeArea(
@@ -48,7 +54,7 @@ class Profile extends StatelessWidget {
                     //     transform: Matrix4.rotationY(mirror)),
                   ),
                   Text(
-                    'Hi ' + username + '!',
+                    'Child Name : ' + username + '!',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -61,7 +67,7 @@ class Profile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
-                  children: [
+                  children:  [
                     Icon(
                       Icons.warning_amber_outlined,
                       size: 30,
@@ -70,7 +76,31 @@ class Profile extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      '''If you think this project seems interesting and need some help implementing it, dont hesitate and lets get in touch!''',
+                      'Date of Birth : '+ birth,
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Text(
+                      'Parent Contact Details  : '+ contact,
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Text(
+                      'Parent House Address : '+address ,
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Text(
+                      'Kindly Contact Parent of Child & inform nearest police Station',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
@@ -83,7 +113,7 @@ class Profile extends StatelessWidget {
               ),
               Spacer(),
               AppButton(
-                text: "LOG OUT",
+                text: "Back To Home",
                 onPressed: () {
                   Navigator.push(
                     context,

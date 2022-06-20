@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:facedetectionattandanceapp/models/user_model.dart';
-import 'package:facedetectionattandanceapp/services/camera_service.dart';
-import 'package:facedetectionattandanceapp/services/facenet_service.dart';
-import 'package:facedetectionattandanceapp/services/ml_kit_service.dart';
-import 'package:facedetectionattandanceapp/widgets/FacePainter.dart';
-import 'package:facedetectionattandanceapp/widgets/auth_action_button.dart';
-import 'package:facedetectionattandanceapp/widgets/camera_header.dart';
+import 'package:mini_project/models/user_model.dart';
+import 'package:mini_project/services/camera_service.dart';
+import 'package:mini_project/services/facenet_service.dart';
+import 'package:mini_project/services/ml_kit_service.dart';
+import 'package:mini_project/widgets/FacePainter.dart';
+import 'package:mini_project/widgets/auth_action_button.dart';
+import 'package:mini_project/widgets/camera_header.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'dart:math'as math;
@@ -53,7 +53,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    final double mirror = math.pi;
+    final double mirror = 0;
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -112,7 +112,7 @@ class _SignInState extends State<SignIn> {
                 }
               }),
           CameraHeader(
-            "LOGIN",
+            "Scan Child",
             onBackPressed: _onBackPressed,
           )
         ],
