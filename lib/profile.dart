@@ -7,6 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'dart:math'as math;
 
+import 'incentive.dart';
+
 class Profile extends StatelessWidget {
 
   const Profile(this.username, this.birth,this.address,this.contact,{ Key? key, required this.imagePath}) : super(key: key);
@@ -112,6 +114,23 @@ class Profile extends StatelessWidget {
                 ),
               ),
               Spacer(),
+              AppButton(
+                text: "Collect incentives",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Incentive()),
+                  );
+                },
+                icon: Icon(
+                  Icons.login_rounded,
+                  color: Colors.white,
+                ),
+                color: Color(0xFFFF6161),
+              ),
+              SizedBox(
+                height:10,
+              ),
               AppButton(
                 text: "Back To Home",
                 onPressed: () {
