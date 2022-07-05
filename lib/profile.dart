@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'dart:math'as math;
 
-import 'incentive.dart';
+import 'Utils.dart';
 
 class Profile extends StatelessWidget {
 
@@ -115,11 +115,11 @@ class Profile extends StatelessWidget {
               ),
               Spacer(),
               AppButton(
-                text: "Collect incentives",
+                text: "Contact Authorities",
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Incentive()),
+                    MaterialPageRoute(builder: (context) => MyHomePage1()),
                   );
                 },
                 icon: Icon(
