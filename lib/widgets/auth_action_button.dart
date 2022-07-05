@@ -32,6 +32,8 @@ final TextEditingController _addressTextEditingController =
 TextEditingController(text: '');
 final TextEditingController _passwordTextEditingController =
 TextEditingController(text: '');
+final TextEditingController _policeTextEditingController =
+TextEditingController(text: '');
 
  User? predictedUser;
 
@@ -54,16 +56,41 @@ Future _signUp(context) async {
     modelData: predictedData,
   );
   /// creates a new user in the 'database'
-   print("dataFromdatabase555==$predictedData");
-  await _databaseHelper.insert(userToSave);
-  _faceNetService.setPredictedData(null);
-  _userTextEditingController.text="";
-  _passwordTextEditingController.text="";
-  _birthTextEditingController.text =  "";
-  _parentContactTextEditingController.text = "";
-  _addressTextEditingController.text = "";
-  Navigator.push(context,
-      MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
+  String policepass = _policeTextEditingController.text;
+  var str1 = 'police';
+  var res = policepass.compareTo(str1);
+  if(res==0)
+    {
+      print("dataFromdatabase555==$predictedData");
+      await _databaseHelper.insert(userToSave);
+      _faceNetService.setPredictedData(null);
+      _userTextEditingController.text="";
+      _passwordTextEditingController.text="";
+      _birthTextEditingController.text =  "";
+      _parentContactTextEditingController.text = "";
+      _addressTextEditingController.text = "";
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
+    }
+  else
+    {
+      _faceNetService.setPredictedData(null);
+      _userTextEditingController.text="";
+      _passwordTextEditingController.text="";
+      _birthTextEditingController.text =  "";
+      _parentContactTextEditingController.text = "";
+      _addressTextEditingController.text = "";
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text('Wrong Police Department Password!!'),
+          );
+        },
+      );
+    }
+
+
 }
   /// resets the face stored in the face net sevice
 
@@ -202,6 +229,14 @@ class _AuthActionButtonState extends State<AuthActionButton> {
           Container(
             child: Column(
               children: [
+                !widget.isLogin
+                    ? AppTextField(
+                  controller: _policeTextEditingController,
+                  labelText: "Police Password",
+                )
+                    : Container(),
+                SizedBox(height: 10),
+
                 !widget.isLogin
                     ? AppTextField(
                   controller: _userTextEditingController,

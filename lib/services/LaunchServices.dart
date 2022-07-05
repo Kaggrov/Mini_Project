@@ -28,7 +28,7 @@ launchEMAIL() async {
 }
 
 launchCALL() async {
-  const phonenumber = "tel:8277567326";
+  const phonenumber = "tel:1098";
   _launch(phonenumber);
 }
 

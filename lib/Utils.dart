@@ -18,6 +18,7 @@ class _MyHomePageState1 extends State<MyHomePage1> {
                 end: Alignment.bottomRight,
                 colors: [Colors.purple[50]!, Colors.orange[300]!])),
     child: Scaffold(
+      backgroundColor: Colors.transparent,
       body: Container(
         width: double.infinity,
         child: Column(
@@ -35,7 +36,7 @@ class _MyHomePageState1 extends State<MyHomePage1> {
             //buildRaisedButton('Send SMS', launchSMS),
             //heightSpacer(25.00),
             AppButton(
-              text: "Contact Authorities",
+              text: "Collect Incentives !!",
               onPressed: () {
                 Navigator.push(
                   context,
@@ -62,6 +63,7 @@ class _MyHomePageState1 extends State<MyHomePage1> {
 
   Widget buildRaisedButton(String text, dynamic event) {
     return RaisedButton(
+      textColor: Colors.white,
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -74,11 +76,13 @@ class _MyHomePageState1 extends State<MyHomePage1> {
         ),
         padding: const EdgeInsets.all(10.0),
         child:  Text(text),
+
       ),
       onPressed: event,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16.0))),
       elevation: 8,
+
     );
   }
 
