@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project/home_page.dart';
 import 'package:mini_project/services/LaunchServices.dart';
 import 'package:mini_project/widgets/app_button.dart';
 import 'incentive.dart';
@@ -36,15 +37,15 @@ class _MyHomePageState1 extends State<MyHomePage1> {
             //buildRaisedButton('Send SMS', launchSMS),
             //heightSpacer(25.00),
             AppButton(
-              text: "Collect Incentives !!",
+              text: "To HomeScreen",
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Incentive()),
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
                 );
               },
               icon: Icon(
-                Icons.login_rounded,
+                Icons.logout,
                 color: Colors.white,
               ),
               color: Color(0xFFFF6161),

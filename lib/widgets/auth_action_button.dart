@@ -4,6 +4,7 @@ import 'package:mini_project/models/user_model.dart';
 import 'package:mini_project/profile.dart';
 import 'package:mini_project/services/camera_service.dart';
 import 'package:mini_project/services/facenet_service.dart';
+import 'package:mini_project/valid.dart';
 import 'package:mini_project/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'app_text_field.dart';

@@ -1,14 +1,18 @@
+import 'package:mini_project/incentive.dart';
 import 'package:mini_project/services/facenet_service.dart';
 import 'package:mini_project/services/ml_kit_service.dart';
 import 'package:mini_project/signin.dart';
 import 'package:mini_project/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:mini_project/valid.dart';
+import 'package:mini_project/widgets/app_text_field.dart';
 
 import 'database/database.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
+
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -21,6 +25,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late CameraDescription cameraDescription;
   bool loading = false;
+   bool incent = false;
+
+  final TextEditingController _policeTextEditingController =
+  TextEditingController(text: '');
 
   @override
   void initState() {
@@ -55,14 +63,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onSelected: (value) {
                 switch (value) {
-                  case 'Clear DB':
+                  case 'Clear':
                     DatabaseHelper _dataBaseHelper = DatabaseHelper.instance;
                     _dataBaseHelper.deleteAll();
                     break;
                 }
               },
               itemBuilder: (BuildContext context) {
-                return {'Clear DB'}.map((String choice) {
+                return {'Clear'}.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
@@ -108,6 +116,52 @@ class _MyHomePageState extends State<MyHomePage> {
                   InkWell(
                     onTap: () {
                       Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => const Valid(
+
+                                  ),
+                                ),
+                              );
+
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xFF00695C),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.blue.withOpacity(0.1),
+                            blurRadius: 1,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 14, horizontal: 16),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Collect Incentives ',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(Icons.celebration, color: Colors.white)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) => SignIn(
@@ -119,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
+                        color: Color(0xFF00695C),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: Colors.blue.withOpacity(0.1),
@@ -137,12 +191,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Text(
                             'Scan Child',
-                            style: TextStyle(color: Color(0xFF0F0BDB)),
+                            style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Icon(Icons.document_scanner_sharp, color: Color(0xFF0F0BDB))
+                          Icon(Icons.document_scanner_sharp, color: Colors.white)
                         ],
                       ),
                     ),
@@ -164,7 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Color(0xFF0F0BDB),
+                        color: Color(0xFF00695C),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: Colors.blue.withOpacity(0.1),
