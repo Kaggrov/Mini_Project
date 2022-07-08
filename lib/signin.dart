@@ -133,6 +133,9 @@ class _SignInState extends State<SignIn> {
     super.dispose();
     // Dispose of the controller when the widget is disposed.
     _cameraService.dispose();
+    _faceNetService.dispose();
+
+
   }
   void _start() async {
     _initializeControllerFuture =
@@ -159,8 +162,8 @@ class _SignInState extends State<SignIn> {
         try {
           List<Face> faces = await _mlKitService.getFacesFromImage(image);
 
-          if (faces != null) {
-            if (faces.length > 0) {
+
+            if (faces.isNotEmpty) {
               // preprocessing the image
               setState(() {
                 faceDetected = faces[0];
@@ -175,7 +178,6 @@ class _SignInState extends State<SignIn> {
                 faceDetected = null;
               });
             }
-          }
 
           _detectingFaces = false;
         } catch (e) {

@@ -22,7 +22,7 @@ class FaceNetService {
   //   return _faceNetService;
   // }
   // singleton boilerplate
-   List? _predictedData;
+   List? _predictedData = [];
   List get predictedData => _predictedData!;
   FaceNetService._internal();
 
@@ -188,7 +188,7 @@ class FaceNetService {
   Future<User?> _searchResult(List predictedData) async{
     try {
       DatabaseHelper _dbHelper = DatabaseHelper.instance;
-      List users = await _dbHelper.queryAllUsers();
+      List<User> users = await _dbHelper.queryAllUsers();
       print("dataFromdatabase55==$predictedData");
       /// if no faces saved
       //if (data.isEmpty) return null;
@@ -229,6 +229,6 @@ class FaceNetService {
   void setPredictedData(value) {
     _predictedData = value;
   }
-
+  dispose() {}
 
 }

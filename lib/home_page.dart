@@ -27,8 +27,8 @@ class _MyHomePageState extends State<MyHomePage> {
   bool loading = false;
    bool incent = false;
 
-  final TextEditingController _policeTextEditingController =
-  TextEditingController(text: '');
+  // final TextEditingController _policeTextEditingController =
+  // TextEditingController(text: '');
 
   @override
   void initState() {

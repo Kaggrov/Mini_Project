@@ -14,30 +14,30 @@ class CameraService{
   CameraService._internal();
 
  late CameraController _cameraController;
-  CameraController get cameraController => this._cameraController;
+  CameraController get cameraController => _cameraController;
 
  late CameraDescription _cameraDescription;
 
  late InputImageRotation _cameraRotation;
-  InputImageRotation get cameraRotation => this._cameraRotation;
+  InputImageRotation get cameraRotation => _cameraRotation;
 
  late String _imagePath;
-  String? get imagePath => this._imagePath;
+  String? get imagePath => _imagePath;
 
   Future startService(CameraDescription cameraDescription) async {
-    this._cameraDescription = cameraDescription;
-    this._cameraController = CameraController(
-      this._cameraDescription,
+    _cameraDescription = cameraDescription;
+    _cameraController = CameraController(
+      _cameraDescription,
       ResolutionPreset.high,
       enableAudio: false,
     );
     // sets the rotation of the image
-    this._cameraRotation = rotationIntToImageRotation(
-      this._cameraDescription.sensorOrientation,
+    _cameraRotation = rotationIntToImageRotation(
+      _cameraDescription.sensorOrientation,
     );
 
     // Next, initialize the controller. This returns a Future.
-    return this._cameraController.initialize();
+    return _cameraController.initialize();
   }
 
   InputImageRotation rotationIntToImageRotation(int rotation) {
@@ -56,7 +56,7 @@ class CameraService{
   /// takes the picture and saves it in the given path 📸
   Future<XFile> takePicture() async {
     XFile file = await _cameraController.takePicture();
-    this._imagePath = file.path;
+    _imagePath = file.path;
     return file;
   }
 
@@ -68,7 +68,7 @@ class CameraService{
     );
   }
 
-  dispose() {
-    this._cameraController.dispose();
+  dispose() async {
+    await _cameraController.dispose();
   }
 }

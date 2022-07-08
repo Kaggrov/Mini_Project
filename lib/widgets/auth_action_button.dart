@@ -64,7 +64,9 @@ Future _signUp(context) async {
     {
       print("dataFromdatabase555==$predictedData");
       await _databaseHelper.insert(userToSave);
+
       _faceNetService.setPredictedData(null);
+
       _userTextEditingController.text="";
       _passwordTextEditingController.text="";
       _birthTextEditingController.text =  "";
@@ -75,7 +77,7 @@ Future _signUp(context) async {
     }
   else
     {
-      _faceNetService.setPredictedData(null);
+      // _faceNetService.setPredictedData(null);
       _userTextEditingController.text="";
       _passwordTextEditingController.text="";
       _birthTextEditingController.text =  "";
@@ -141,12 +143,13 @@ class _AuthActionButtonState extends State<AuthActionButton> {
 
           if (faceDetected) {
             if (widget.isLogin) {
-                var user =await _predictUser();
+                var user = await _predictUser();
                 print("NullIssue======${user?.user}");
                 if (user != null) {
-                   predictedUser = user;
+                  predictedUser = user;
+
                 }else{
-                  predictedUser=null;
+                  predictedUser = null;
                 }
             }
 

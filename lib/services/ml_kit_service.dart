@@ -17,11 +17,11 @@ class MLKitService {
   CameraService _cameraService = CameraService();
 
  late FaceDetector _faceDetector;
-  FaceDetector get faceDetector => this._faceDetector;
+  FaceDetector get faceDetector => _faceDetector;
 
   void initialize() {
-    this._faceDetector = GoogleMlKit.vision.faceDetector(
-      FaceDetectorOptions(
+    _faceDetector = GoogleMlKit.vision.faceDetector(
+      const FaceDetectorOptions(
         mode: FaceDetectorMode.accurate,
       ),
     );
@@ -51,7 +51,7 @@ class MLKitService {
 
     /// proces the image and makes inference 🤖
     List<Face> faces =
-    await this._faceDetector.processImage(_firebaseVisionImage);
+    await _faceDetector.processImage(_firebaseVisionImage);
     return faces;
   }
 }

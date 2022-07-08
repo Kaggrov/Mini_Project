@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class FacePainter extends CustomPainter {
 
-  FacePainter({required this.imageSize,this.face});
+  FacePainter({required this.imageSize, required this.face});
   final Size imageSize;
- late double scaleX, scaleY;
+  double? scaleX, scaleY;
   Face? face;
 
   @override
@@ -35,27 +35,27 @@ class FacePainter extends CustomPainter {
             rect: face!.boundingBox,
             imageSize: imageSize,
             widgetSize: size,
-            scaleX: scaleX,
-            scaleY: scaleY),
+            scaleX: scaleX ?? 1,
+            scaleY: scaleY ?? 1),
         paint);
   }
 
   @override
   bool shouldRepaint(FacePainter  oldDelegate) {
     // TODO: implement shouldRepaint
-    return oldDelegate.imageSize!= imageSize || oldDelegate.face!= face;
+    return oldDelegate.imageSize != imageSize || oldDelegate.face!= face;
   }
 }
 RRect _scaleRect(
     {required Rect rect,
       required Size imageSize,
       required Size widgetSize,
-        double? scaleX,
-      double? scaleY}) {
+        double scaleX = 1,
+      double scaleY = 1}) {
   return RRect.fromLTRBR(
-      (widgetSize.width - rect.left.toDouble() * scaleX!),
-      rect.top.toDouble() * scaleY!,
+      (widgetSize.width - rect.left.toDouble() * scaleX),
+      rect.top.toDouble() * scaleY,
       widgetSize.width - rect.right.toDouble() * scaleX,
       rect.bottom.toDouble() * scaleY,
-      const Radius.circular(10));
+       const Radius.circular(10));
 }
